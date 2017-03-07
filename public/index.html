@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <title>ioChat Angular</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body ng-controller="chatController as vm">
+
+    <div class='container'>
+      <div id="userFormArea" class="row">
+        <div class="col-md-12">
+          <form id="userForm" ng-show="!vm.userCheck">
+            <div class="form-group">
+              <label for="">Enter a Username</label>
+              <input ng-model="user" class="form-control" id="username" name="name" rows="8" cols="80"></input>
+              <br />
+              <input ng-click="vm.addUser(user)" type="button" class="btn btn-primary "name="" value="Login">
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="messageArea" class="row" ng-show="vm.userCheck">
+        <div class="col-md-4">
+          <div class="well">
+            <h3>Online Users</h3>
+            <ul class="list-group" id="users">
+              <li ng-repeat="user in vm.users">
+                  {{user}}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="chat" id="chat">
+            <ul>
+              <li ng-repeat="msg in vm.messages">
+                {{msg.msg}}
+              </li>
+            </ul>
+            <form id="messageForm">
+              <div class="form-group">
+                <label for="">Enter Message</label>
+                <textarea ng-model="message" class="form-control" id="message" name="name" rows="8" cols="80"></textarea>
+                <br />
+                <input ng-click="vm.sendMessage(message)" type="button" class="btn btn-primary "name="" value="Send message">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+    <!-- Local Scripts -->
+    <script src="app.module.js"></script>
+    <script src="app.ioSocketFactory.js"></script>
+    <script src="app.controller.js"></script>
+  </body>
+</html>
